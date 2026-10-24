@@ -57,3 +57,10 @@ func reparent_node_to(node: Node, new_parent: Node):
 	old_parent.remove_child(node)
 	# TODO: free memory?
 	new_parent.add_child(node)
+
+
+# Cabinet: hold Select + Start on any stick to quit back to EmulationStation
+func _input(event):
+	if event is InputEventJoypadButton and event.pressed:
+		if Input.is_joy_button_pressed(event.device, 8) and Input.is_joy_button_pressed(event.device, 9):
+			get_tree().quit()
