@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scripts/master/master.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/NEON CLUB MUSIC_bold.otf" type="DynamicFontData" id=2]
@@ -9,11 +9,24 @@
 [ext_resource path="res://assets/sounds/goal.mp3" type="AudioStream" id=7]
 [ext_resource path="res://assets/textures/background.png" type="Texture" id=10]
 [ext_resource path="res://assets/sounds/music.mp3" type="AudioStream" id=13]
+[ext_resource path="res://assets/textures/ui_ninepatch.png" type="Texture" id=14]
 
 [sub_resource type="DynamicFont" id=7]
 size = 64
 use_filter = true
 extra_spacing_top = 15
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=22]
+size = 40
+use_filter = true
+extra_spacing_top = 10
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=23]
+size = 30
+use_filter = true
+extra_spacing_top = 10
 font_data = ExtResource( 2 )
 
 [sub_resource type="Animation" id=19]
@@ -146,6 +159,22 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="clock" type="Label" parent="background"]
+modulate = Color( 2, 2, 2, 1 )
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -200.0
+margin_top = -70.0
+margin_right = 200.0
+margin_bottom = -10.0
+custom_colors/font_color = Color( 1, 1, 0.921569, 0.803922 )
+custom_fonts/font = SubResource( 22 )
+text = "2:00"
+align = 1
+valign = 1
+
 [node name="animations" type="AnimationPlayer" parent="background"]
 anims/RESET = SubResource( 19 )
 anims/p1_score_increase = SubResource( 20 )
@@ -194,6 +223,51 @@ shape = SubResource( 6 )
 
 [node name="pause_menu" parent="." instance=ExtResource( 4 )]
 visible = false
+
+[node name="match_over" type="NinePatchRect" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -380.0
+margin_top = -150.0
+margin_right = 380.0
+margin_bottom = 150.0
+texture = ExtResource( 14 )
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+
+[node name="lines" type="VBoxContainer" parent="match_over"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+alignment = 1
+
+[node name="winner" type="Label" parent="match_over/lines"]
+modulate = Color( 2, 2, 2, 1 )
+custom_fonts/font = SubResource( 7 )
+text = "player 1 wins"
+align = 1
+valign = 1
+
+[node name="score" type="Label" parent="match_over/lines"]
+custom_fonts/font = SubResource( 22 )
+text = "3 - 1"
+align = 1
+valign = 1
+
+[node name="hint" type="Label" parent="match_over/lines"]
+custom_colors/font_color = Color( 1, 1, 1, 0.5 )
+custom_fonts/font = SubResource( 23 )
+text = "press a button"
+align = 1
+valign = 1
 
 [node name="sounds" type="Node" parent="."]
 
